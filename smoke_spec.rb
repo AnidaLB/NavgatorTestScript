@@ -14,52 +14,51 @@ end
 
 
 describe 'Navigator test' do
+	
 	context "When searching for a place" do
 
+		it 'should open the main page' do
+ 		@browser.goto('http://www.navigator.ba/#/categories')
+		end 
 
-it 'should open the main page' do
- @browser.goto('http://www.navigator.ba/#/categories')
-end 
+		it 'should enter the name of the place' do
+		@browser.text_field(:xpath => '//*[@id="ember558"]').send_keys "atlantbh"
+		end
 
-it 'should enter the name of the place' do
-	@browser.text_field(:xpath => '//*[@id="ember558"]').send_keys "atlantbh"
-end
+		it 'should click on search icon' do
+		@browser.span(:xpath => '//*[@id="ember549"]/a/span').click
+		end
 
-it 'should click on search icon' do
-	@browser.span(:xpath => '//*[@id="ember549"]/a/span').click
-end
-
-it 'should open the place from search results' do
-	@browser.element(title: "Atlantbh").click
-sleep 5
-end
-
-end
+		it 'should open the place from search results' do
+		@browser.element(title: "Atlantbh").click
+		sleep 5
+		end
+	end
 
 
 context "When creating a place" do
 
 	it 'should open the "Create place" form' do
  	@browser.span(class: "iconav-plus").click 
-end
+	end
 
-it 'should enter the name for the place' do
+	it 'should enter the name for the place' do
 	@browser.input(:xpath => '//*[@id="poi_name"]').send_keys "Ortakoy"
-end
+	end
 
-it 'should click on "Categories" button' do
+	it 'should click on "Categories" button' do
 	@browser.button(class: ["ember-view", "btn", "btn-small"]).click
-end
+	end
 
-it 'should choose a category from a list' do
+	it 'should choose a category from a list' do
 	@browser.option(text: "Hrana").click
 	sleep 2 
-end
+	end
 
-it 'should create the place' do
+	it 'should create the place' do
 	@browser.button(class: ["btn", "btn-success"]).click!
 	sleep 5
-end
+	end
 
 end
 end
