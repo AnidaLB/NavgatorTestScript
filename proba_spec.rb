@@ -1,8 +1,6 @@
-
 require 'rspec'
 require 'selenium-webdriver'
 require "watir"
-require 'watir-scroll'
 
 browser = Watir::Browser.new :chrome 
 
@@ -14,67 +12,54 @@ RSpec.configure do |config|
   config.after(:suite) { browser.close unless browser.nil? }
 end
 
-describe 'Testing the page' do
+
+describe 'Navigator test' do
+	context "When searching for a place" do
 
 
-it 'to open Navigator page' do
+it 'should open the main page' do
  @browser.goto('http://www.navigator.ba/#/categories')
 end 
 
-# it 'to find search text field ' do
-# 	@browser.element(:xpath => '//*[@id="ember558"]').click
-# end
-
-it 'to enter the place to search' do
-	@browser.element(:xpath => '//*[@id="ember558"]').send_keys "atlantbh"
+it 'should enter the name of the place' do
+	@browser.text_field(:xpath => '//*[@id="ember558"]').send_keys "atlantbh"
 end
 
-it 'to click search icon' do
-	@browser.element(:xpath => '//*[@id="ember549"]/a/span').click
+it 'should click on search icon' do
+	@browser.span(:xpath => '//*[@id="ember549"]/a/span').click
 end
 
-it 'to open the place from search results' do
+it 'should open the place from search results' do
 	@browser.element(title: "Atlantbh").click
 sleep 5
 end
 
+end
 
 
-#  it 'to open the "Create place" form' do
-#  	@browser.element(class: "iconav-plus").click 
-# end
+context "When creating a place" do
 
-# it 'to find the required textfield "Name" ' do
-# 	@browser.element(:xpath => '//*[@id="poi_name"]').click
-# end
+	it 'should open the "Create place" form' do
+ 	@browser.span(class: "iconav-plus").click 
+end
 
-# it 'to enter the name for the place' do
-# 	@browser.element(:xpath => '//*[@id="poi_name"]').send_keys "Ortakoy"
-# end
+it 'should enter the name for the place' do
+	@browser.input(:xpath => '//*[@id="poi_name"]').send_keys "Ortakoy"
+end
 
-# it 'to click on "Categories" button' do
-# 	@browser.button(class: ["ember-view", "btn", "btn-small"]).click
-# end
+it 'should click on "Categories" button' do
+	@browser.button(class: ["ember-view", "btn", "btn-small"]).click
+end
 
-# it 'to choose a category from a list' do
-# 	@browser.option(text: "Hrana").click
-# end
+it 'should choose a category from a list' do
+	@browser.option(text: "Hrana").click
+	sleep 2 
+end
 
+it 'should create the place' do
+	@browser.button(class: ["btn", "btn-success"]).click!
+	sleep 5
+end
 
-
-# it 'should create the place' do
-# 	#@browser.button(class: ["btn", "btn-success"]).exists?
-# 	#@browser.element(class: ["btn", "btn-success"]).scroll.to :center
-# 	#@browser.button(class: ["btn", "btn-success"]).wait_until_present
-# 	# element=@browser.button(class: ["btn", "btn-success"])
-# 	# puts element.location
-# 	@browser.scroll.to [248.95834350585938, 1749.5208740234375]
-# 	#@browser.button(class: ["btn", "btn-success"]).scroll_into_view
-# 	@browser.button(class: ["btn", "btn-success"]).click
-
-# 	sleep 2
-# end
-
-#puts @browser.title
-#@browser.quit
+end
 end
