@@ -45,11 +45,16 @@ describe 'Navigator regression test' do
 			@browser.button(class: ["btn", "btn-success", "btn-suggest-edit"]).click!
 		end
 
-		# it 'should check the content' do
-		# end
+		it 'should check the content' do
+			@vrijednost = @browser.textarea(id: 'poi_description').value
+			@b = "Leading Software Development and Outsourcing Company in Bosnia and Herzegovina"
+			expect(@vrijednost).to include(@b)
+		end
 
-		# it 'should make the suggestion' do
-		# end
+		it 'should make the suggestion' do
+			@browser.option(text: "Kompanija").click
+			@browser.option(text: "Informatička kompanija").click
+		end
 
 		it 'should submit the form' do
 			@browser.button(class: ["btn", "btn-success"]).click!
@@ -57,5 +62,3 @@ describe 'Navigator regression test' do
 		
 	end
 end
-
-
