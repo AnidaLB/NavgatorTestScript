@@ -30,6 +30,7 @@ describe 'Navigator regression test' do
 
 		it 'should check if the page is opened' do
 			@browser.window(:url => /atlantbh/).use
+			@browser.refresh
 			@browser.url
 			expect(@browser.url).to eq('https://www.atlantbh.com/')
 		end
