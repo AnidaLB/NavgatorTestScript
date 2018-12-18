@@ -59,6 +59,10 @@ describe 'Navigator regression test' do
 		it 'should submit the form' do
 			@browser.button(class: ["btn", "btn-success"]).click!
 		end
+
+		it 'should close the confirmation window' do
+			@browser.button(class: ["alertify-button", "alertify-button-ok"]).click
+		end
 		
 	end
 end
